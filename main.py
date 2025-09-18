@@ -17,7 +17,11 @@ def main(app):
 
     def calculate(button):
         expr = display.get_buffer().get_text()
-        result = str(eval(expr)).replace('.0', '')
+        result = eval(expr)
+        if isinstance(result, float) and result.is_integer():
+            result = str(int(result))
+        else:
+            result = str(result)
         display.get_buffer().set_text(result, -1)
 
     def clear(button):
